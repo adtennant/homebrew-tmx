@@ -7,7 +7,7 @@ class Tmx < Formula
   depends_on "cmake" => :build
 
   def install
-    system "cmake", ".", *std_cmake_args
+    system "cmake", ".", "-DBUILD_SHARED_LIBS=on", *std_cmake_args
     system "make", "install"
   end
 
@@ -103,7 +103,7 @@ class Tmx < Formula
         return 0;
       }
     EOS
-    system ENV.cc, "test.c", "#{lib}/libtmx.a", "-lz", "-lxml2", "-o", "test"
+    system ENV.cc, "test.c", "#{lib}/libtmx.dylib", "-lz", "-lxml2", "-o", "test"
     system "./test"
   end
 end
